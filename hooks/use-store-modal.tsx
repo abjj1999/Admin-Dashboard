@@ -1,5 +1,6 @@
 import {create} from 'zustand';
-
+// this page controller the modal states and actions, 
+// 
 interface useStoreModalStore {
     isOpen: boolean;
     onOpen: () => void;
