@@ -17,7 +17,7 @@
 ## Planet Scale (DB provider that deals with mysql)
     - Create an account or login to planetScale
     - Create a new database
-    - After the database is created, 
+    - After the database (needed tables) is created, 
         - click on the database and click on the "Connect" button
         - select the connection method as "Prisma"
         - copy the connection string that contains the database name, username, password, host, port, and db name
