@@ -13,6 +13,8 @@
         - npx prisma generate (this will connect prisma and every table in the database to the app)
     - Then to push prisma changes to planetScale 
         npx prisma db push
+    - To reset the database
+        npx prisma migrate reset
 
 ## Planet Scale (DB provider that deals with mysql)
     - Create an account or login to planetScale
