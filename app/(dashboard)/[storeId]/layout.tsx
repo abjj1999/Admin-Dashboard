@@ -3,6 +3,7 @@ import { auth } from '@clerk/nextjs';
 
 // import Navbar from '@/components/navbar'
 import prismadb from '@/lib/prismadb';
+import Navbar from '@/components/Navbar';
 
 export default async function DashboardLayout({
   children,
@@ -31,9 +32,7 @@ export default async function DashboardLayout({
   return (
     <>
       {/* <Navbar /> */}
-      <div className="">
-        navbar here
-      </div>
+      <Navbar />
       {children}
     </>
   );
