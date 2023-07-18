@@ -43,7 +43,7 @@ export const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
         "
       >
         <Heading title="Settings" description="Manage your store settings" />
-        <Button variant="destructive" size="sm" onClick={() => {}} className="">
+        <Button variant="destructive" size="sm" onClick={() => {}} className="" disabled={loading}>
           <Trash className="h-4 w-4" />
         </Button>
       </div>
