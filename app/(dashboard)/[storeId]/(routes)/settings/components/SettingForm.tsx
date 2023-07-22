@@ -2,6 +2,7 @@
 
 import { Heading } from "@/components/Heading";
 import { AlertModal } from "@/components/modals/alert-modal";
+import { ApiAlert } from "@/components/ui/api-alert";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -134,6 +135,10 @@ export const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
+      <Separator />
+      <ApiAlert title="NEXT_PUBLIC_URL"
+       description="test"  
+       variant="admin"/>
     </>
   );
 };
