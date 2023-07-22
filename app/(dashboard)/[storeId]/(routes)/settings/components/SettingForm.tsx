@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
 
+import { useOrigin } from "@/hooks/use-origin";
 interface SettingFormProps {
   initialData: Store;
 }
@@ -41,6 +42,7 @@ export const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
   });
   const params = useParams();
   const router = useRouter();
+  const origin = useOrigin();
 
   const [open, setOpen] = useState(false); // alert modal
   const [loading, setLoading] = useState(false);
@@ -137,7 +139,7 @@ export const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
       </Form>
       <Separator />
       <ApiAlert title="NEXT_PUBLIC_URL"
-       description="test"  
+       description={`${origin}/${params.storeId}`}  
        variant="admin"/>
     </>
   );
