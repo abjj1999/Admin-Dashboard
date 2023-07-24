@@ -2,7 +2,6 @@
 
 import { Heading } from "@/components/Heading";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { ApiAlert } from "@/components/ui/api-alert";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -24,7 +23,6 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
 
-import { useOrigin } from "@/hooks/use-origin";
 import ImageUpload from "@/components/ui/ImageUpload";
 interface BillBoardFormProps {
   initialData: BillBoard | null;
@@ -47,7 +45,7 @@ export const BillBoardForm: React.FC<BillBoardFormProps> = ({ initialData }) => 
   });
   const params = useParams();
   const router = useRouter();
-  const origin = useOrigin();
+  // const origin = useOrigin();
 
   const [open, setOpen] = useState(false); // alert modal
   const [loading, setLoading] = useState(false);
@@ -61,9 +59,15 @@ export const BillBoardForm: React.FC<BillBoardFormProps> = ({ initialData }) => 
     // console.log(values)
     try {
       setLoading(true);
-      await axios.patch(`/api/stores/${params.storeId}`, values);
+      if(initialData){
+        await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, values);
+      }else {
+        await axios.post(`/api/${params.storeId}/billboards`, values);
+        
+      }
       router.refresh();
-      toast.success("Store updated successfully");
+      router.push(`/${params.storeId}/billboards`)
+      toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -74,10 +78,10 @@ export const BillBoardForm: React.FC<BillBoardFormProps> = ({ initialData }) => 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}`);
+      await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
       router.refresh();
       router.push("/");
-      toast.success("Store deleted successfully");
+      toast.success("Billboard deleted successfully");
       
     } catch (error) {
       toast.error("Something went wrong");
