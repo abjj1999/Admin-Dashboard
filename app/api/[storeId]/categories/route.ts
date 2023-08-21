@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs';
 
 import prismadb from '@/lib/prismadb';
+// import { ca } from 'date-fns/locale';
 
 export async function POST(
   req: Request,
@@ -11,18 +12,18 @@ export async function POST(
     const { userId } = auth();
     const body = await req.json();
 
-    const { label, imageUrl } = body;
+    const { name, billboardId } = body;
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    if (!label) {
-      return new NextResponse("lebal is required", { status: 400 });
+    if (!name) {
+      return new NextResponse("name is required", { status: 400 });
     }
 
-    if (!imageUrl) {
-      return new NextResponse("image is required", { status: 400 });
+    if (!billboardId) {
+      return new NextResponse("Bilboard is required", { status: 400 });
     }
 
     if(!params.storeId) {
@@ -40,17 +41,17 @@ export async function POST(
         return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const billBoard = await prismadb.billBoard.create({
+    const category = await prismadb.category.create({
       data: {
-        label,
-        imageUrl,
+        name,
+        billboardId,
         storeId: params.storeId,
       }
     });
   
-    return NextResponse.json(billBoard);
+    return NextResponse.json(category);
   } catch (error) {
-    console.log('[BillBoard_POST]', error);
+    console.log('[CATEGORY_POST]', error);
     return new NextResponse("Internal error", { status: 500 });
   }
 };
@@ -71,15 +72,15 @@ export async function GET(
     
    
 
-    const billBoards = await prismadb.billBoard.findMany({
+    const categories = await prismadb.category.findMany({
         where: {
             storeId: params.storeId
         }
     });
   
-    return NextResponse.json(billBoards);
+    return NextResponse.json(categories);
   } catch (error) {
-    console.log('[BillBoard_GET]', error);
+    console.log('[CATEGORY_GET]', error);
     return new NextResponse("Internal error", { status: 500 });
   }
 };
