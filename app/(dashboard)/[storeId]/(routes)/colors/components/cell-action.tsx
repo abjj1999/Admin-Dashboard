@@ -1,7 +1,7 @@
 "use client";
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
-import { SizeColumn } from "./columns";
+import { ColorColumn } from "./columns";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Copy, Delete, Edit, MoreHorizontal } from "lucide-react";
@@ -12,7 +12,7 @@ import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-    data: SizeColumn;
+    data: ColorColumn;
 
 }
 
@@ -31,7 +31,7 @@ export const CellAction: React.FC<CellActionProps> = ({
     const onDelete = async () => {
         try {
           setLoading(true);
-          await axios.delete(`/api/${params.storeId}/sizes/${data.id}`);
+          await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
           router.refresh();
         //   router.push("/");
           toast.success("Size deleted successfully");
@@ -68,7 +68,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                     Copy Id
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                 onClick={() => router.push(`/${params.storeId}/sizes/${data.id}`)}
+                 onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}
                 >
                     <Edit className="mr-2 h-4 w-4" />
                     Update
