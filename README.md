@@ -31,6 +31,8 @@
             - npx shadcn-ui@latest init
             - after you answer a couple of questions the app folder layout would look like 
                     ├── app
+                    |   |--- (Dashboard) --> it's not a route, it's just a folder that contains the dashboard page
+                            
                     │   ├── layout.tsx
                     │   └── page.tsx
                     ├── components
