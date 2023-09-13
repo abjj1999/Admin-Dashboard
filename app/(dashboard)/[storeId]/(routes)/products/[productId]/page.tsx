@@ -5,7 +5,7 @@ const ProductPage = async ({
     params,
 }:{
     params: {
-        productId: string;
+        productId: string, storeId: string
     }
 }) => {
     const product = await prismadb.product.findUnique({
@@ -17,10 +17,30 @@ const ProductPage = async ({
         }
     });
 
+    const categories = await prismadb.category.findMany({
+        where: {
+            storeId: params.storeId,
+        },
+    });
+    const sizes = await prismadb.size.findMany({
+        where: {
+            storeId: params.storeId,
+        },
+    });
+    const colots = await prismadb.color.findMany({
+        where: {
+            storeId: params.storeId,
+        },
+    });
+
     return ( 
         <div className="flex-col ">
             <div className="flex-1 space-y-4 p-8 pt-6">
-                <ProductForm initialData={product}/>
+                <ProductForm 
+                    categories={categories}
+                    sizes={sizes}
+                    colors={colots}
+                initialData={product}/>
             </div>
         </div>
      );
