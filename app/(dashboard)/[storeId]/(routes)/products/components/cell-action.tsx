@@ -1,7 +1,7 @@
 "use client";
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
-import { BillboardColumn } from "./columns";
+import { ProductColumn } from "./columns";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Copy, Delete, Edit, MoreHorizontal } from "lucide-react";
@@ -12,7 +12,7 @@ import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-    data: BillboardColumn;
+    data: ProductColumn;
 
 }
 
@@ -31,10 +31,10 @@ export const CellAction: React.FC<CellActionProps> = ({
     const onDelete = async () => {
         try {
           setLoading(true);
-          await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+          await axios.delete(`/api/${params.storeId}/products/${data.id}`);
           router.refresh();
         //   router.push("/");
-          toast.success("Billboard deleted successfully");
+          toast.success("Product deleted successfully");
           
         } catch (error) {
           toast.error("Something went wrong");
@@ -68,7 +68,7 @@ export const CellAction: React.FC<CellActionProps> = ({
                     Copy Id
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                 onClick={() => router.push(`/${params.storeId}/billboards/${data.id}`)}
+                 onClick={() => router.push(`/${params.storeId}/products/${data.id}`)}
                 >
                     <Edit className="mr-2 h-4 w-4" />
                     Update
