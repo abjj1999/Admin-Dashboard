@@ -139,7 +139,7 @@ export const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
       </Form>
       <Separator />
       <ApiAlert title="NEXT_PUBLIC_URL"
-       description={`${origin}/${params.storeId}`}  
+       description={`${origin}/api/${params.storeId}`}  
        variant="admin"/>
     </>
   );
